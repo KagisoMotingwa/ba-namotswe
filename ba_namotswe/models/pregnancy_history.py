@@ -1,9 +1,7 @@
-from django.db import models
-
-from edc_base.model.models.base_uuid_model import BaseUuidModel
+from django import forms
 
 
-class PregnancyHistory(BaseUuidModel):
+class PregnancyHistory(forms.ModelForm):
 
     class Meta:
         app_label = 'ba_namotswe'
@@ -15,8 +13,4 @@ class PregnancyHistory(BaseUuidModel):
             ('date_of_first_clinical_documentation_of_pregnancy', 'Date of First Clinical Documentation of Pregnancy'),
             ('date_of_delivery', 'Date of Delivery'),
         null=True,
-        blank=False,
-        help_text=""
-
-
-
+        blank=False

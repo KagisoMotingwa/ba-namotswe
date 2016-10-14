@@ -3,7 +3,7 @@ from django.test import TestCase
 
 from dateutil.relativedelta import relativedelta
 
-from edc_constants.constants import YES
+from edc_constants.constants import YES, MALE
 from ba_namotswe.forms.enrollment_form import EnrollmentForm
 from ba_namotswe.tests.factories.registered_subject_factory import RegisteredSubjectFactory
 
@@ -15,14 +15,19 @@ class TestEnrollment(TestCase):
 
         self.data = {
             'registered_subject': self.registered_subject.id,
+            'initials': 'KK',
+            'dob': date(1988, 7, 7),
+            'gender': MALE,
             'report_datetime': datetime.now(),
             'is_eligible': True,
             'initial_visit_date': date.today() - relativedelta(years=3),
-            #'caregiver_relation': 'mother',
+            'caregiver_relation': 'mother',
+            'caregiver_relation_other': None,
             'weight_measured': YES,
             'weight': 200,
             'height_measured': YES,
             'height': 50,
+            'hiv_diagnosis_date': date.today(),
             'art_initiation_date': date.today()}
 
     def test_valid_form(self):
@@ -35,6 +40,12 @@ class TestEnrollment(TestCase):
         form = EnrollmentForm(data=self.data)
         self.assertNotIn(
             'You should provide record number',
+            form.errors.get('record_number', []))
+
+    def test_record_number_not_provided(self):
+        """Test to see if  record number not given"""
+        form = EnrollmentForm(data=self.data)
+        self.assertIn(
             form.errors.get('record_number', []))
 
     def test_record_number_provided_valid(self):

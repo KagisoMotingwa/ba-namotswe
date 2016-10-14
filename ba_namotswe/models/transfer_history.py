@@ -5,6 +5,9 @@ from edc_base.model.models.base_uuid_model import BaseUuidModel
 
 class TransferHistory(BaseUuidModel):
 
+    class Meta:
+        app_label = 'ba_namotswe'
+
     transfer_details = models.CharField(
         verbose_name="Transfer of Care Details",
         max_length=15,
@@ -30,9 +33,3 @@ class TransferHistory(BaseUuidModel):
         verbose_name='location of transfer: "Other"',
         blank=True,
         null=True)
-
-     def __str__(self):
-        return self.display_name
-
-    class Meta:
-        app_label = 'ba_namotswe'
