@@ -1,6 +1,6 @@
 from django import forms
- 
-from ba_namotswe.models import Enrollment, RegisteredSubject
+
+from ba_namotswe.models.adherence_counselling import Adherence_Counselling
 from edc_base.utils.age import age
 from edc_constants.constants import NO, YES
 from datetime import date
@@ -9,8 +9,7 @@ from datetime import date
 class AdherencePartnerRelationForm(forms.ModelForm):
 
     def clean(self):
-        self.validate_adherence_partner_relation()
-        self.validate_adherence_partne_relation_other()
+        self.validate_adherence_partner_relation_other()
         return self.cleaned_data
 
     def validate_adherence_partner_relation_other(self):
@@ -26,3 +25,6 @@ class AdherencePartnerRelationForm(forms.ModelForm):
                         'You should enter other adherence_partner relation as you have selected OTHER adherence_partner relation']})
         return self.cleaned_data
 
+    class Meta:
+        model = Adherence_Counselling
+        fields = '__all__'

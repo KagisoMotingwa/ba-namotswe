@@ -28,7 +28,7 @@ class Adherence_Counselling(BaseUuidModel):
             ('sister', 'Sister'),
             ('legal_guardian', 'Legal Guardian'),
             ('not_applicable', 'Not Applicable'),
-            ('OTHER', 'Other, specify')),
+            ('OTHER', 'Other, specify')),)
 
     adherence_partner_other = models.CharField(
         max_length=25,

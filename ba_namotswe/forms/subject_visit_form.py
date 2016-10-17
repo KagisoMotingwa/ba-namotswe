@@ -1,5 +1,6 @@
 from django import forms
 from ba_namotswe.models import SubjectVisit
+from edc_identifier.models import subject_identifier
 
 
 class SubjectVisitForm(forms.BaseModelForm):
@@ -10,6 +11,8 @@ class SubjectVisitForm(forms.BaseModelForm):
     def validate_report_datetime(self):
         enrol = self.cleaned_data.get('enrollment')
         registered_subject = enrol.registered_subject
+        subject_identifier = enrol.subject_identifier
+        report_datetime = enrol.report_datetime
         dob = registered_subject.dob
         if self.cleaned_data.get('appointment'):
             if self.cleaned_data.get("report_datetime") < dob:

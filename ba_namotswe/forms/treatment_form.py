@@ -16,16 +16,16 @@ class TreatmentForm(forms.ModelForm):
                 if not self.cleaned_data.get('pmtct'):
                     raise forms.ValidationError({
                         'pmtct': [
-                            'Cannot leave this question blank']})
+                            'You selected perinatal infection']})
             return self.cleaned_data
 
     def validate_perinatal_infection_pmtct_rx(self):
-        if self.cleaned_data.get('perinatal_infection'):
-            if self.cleaned_data.get('perinatal_infection') == YES:
-                if not self.cleaned_data.get('pmtct'):
+        if self.cleaned_data.get('pmtct_rx '):
+            if self.cleaned_data.get('pmtct_rx ') == YES:
+                if not self.cleaned_data.get('pmtct_rx '):
                     raise forms.ValidationError({
                         'pmtct_rx': [
-                            'Cannot leave this question blank']})
+                            'you have given perinatal infection pmtct reason']})
             return self.cleaned_data
 
     class Meta:

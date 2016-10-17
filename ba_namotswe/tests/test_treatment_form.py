@@ -25,6 +25,52 @@ class TestTreatmentForm(TestCase):
             'adherence_partner_rel': None}
 
     def test_valid_form(self):
-        """Test to verify whether form will submit"""
+        """Test to verify whether  Treatment form will submit"""
         form = TreatmentForm(data=self.data)
         self.assertTrue(form.is_valid())
+        print(form.errors)
+
+    def test_if_perinatal_infection_pmtct(self):
+        """Test when the disease is perinatal infection"""
+        self.data['perinatal_infection'] = YES
+        form = TreatmentForm(data=self.data)
+        self.assertIn(
+            'You selected perinatal infection',
+            form.errors.get('perinatal_infection', []))
+
+    def test_if_not_perinatal_infection_pmtct(self):
+        """Test when the disease is not perinatal infection"""
+        form = TreatmentForm(data=self.data)
+        self.assertIn(
+            'You have not selected perinatal infection',
+            form.errors.get('perinatal_infection', []))
+
+    def test_if_enrolled_in_pmtct_(self):
+        """"Test to see if enrolled in pmtct"""
+        self.data['pmtct'] = YES
+        form = TreatmentForm(data=self.data)
+        self.assertIn(
+            'You have been enrolled in pmtct',
+            form.errors.get('pmtct', []))
+
+    def test_if_not_enrolled_in_pmtct(self):
+        """Test when not enrolled in pmtct"""
+        form = TreatmentForm(data=self.data)
+        self.assertNotIn(
+            'you are not enrolled in pmtct',
+            form.errors.get('pmtct', []))
+
+    def test_if_perinatal_infection_pmtct_rx_given(self):
+        """Test to see if perinatal infection pmtct reason given"""
+        self.data['pmtct_rx']
+        form = TreatmentForm(data=self.data)
+        self.assertIn(
+            'you have given perinatal infection pmtct reason',
+            form.errors.get('pmtct_rx', []))
+
+    def test_if_perinatal_infection_pmtct_rx_not_given(self):
+        """Test when perinatal infection pmtct reason is not given"""
+        form = TreatmentForm(data=self.data)
+        self.assertNotIn(
+            'you have not given the perinatal infection pmtct reason',
+            form.errors.get('pmtct_rx', []))

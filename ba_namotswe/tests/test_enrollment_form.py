@@ -5,6 +5,7 @@ from dateutil.relativedelta import relativedelta
 
 from edc_constants.constants import YES, MALE
 from ba_namotswe.forms.enrollment_form import EnrollmentForm
+#from ba_namotswe.models.Enrollment import Subject_identifier
 from ba_namotswe.tests.factories.registered_subject_factory import RegisteredSubjectFactory
 
 
@@ -16,6 +17,7 @@ class TestEnrollment(TestCase):
         self.data = {
             'registered_subject': self.registered_subject.id,
             'initials': 'KK',
+            'subject_identifier': '06609090-2',
             'dob': date(1988, 7, 7),
             'gender': MALE,
             'report_datetime': datetime.now(),
@@ -24,9 +26,9 @@ class TestEnrollment(TestCase):
             'caregiver_relation': 'mother',
             'caregiver_relation_other': None,
             'weight_measured': YES,
-            'weight': 200,
+            'weight': 120,
             'height_measured': YES,
-            'height': 50,
+            'height': 120,
             'hiv_diagnosis_date': date.today(),
             'art_initiation_date': date.today()}
 
@@ -34,26 +36,6 @@ class TestEnrollment(TestCase):
         """Test to verify that enrollment form will submit"""
         form = EnrollmentForm(data=self.data)
         self.assertTrue(form.is_valid())
-
-    def test_record_number_provided(self):
-        """Test to see if record number provided"""
-        form = EnrollmentForm(data=self.data)
-        self.assertNotIn(
-            'You should provide record number',
-            form.errors.get('record_number', []))
-
-    def test_record_number_not_provided(self):
-        """Test to see if  record number not given"""
-        form = EnrollmentForm(data=self.data)
-        self.assertIn(
-            form.errors.get('record_number', []))
-
-    def test_record_number_provided_valid(self):
-        """Test to see if valid record number is provided"""
-        form = EnrollmentForm(data=self.data)
-        self.assertNotIn(
-            'You provided wrong record number',
-            form.errors.get('record_number', []))
 
     def test_date_of_birth_provided(self):
         """Test to see if valid date_of_birth is provided"""
