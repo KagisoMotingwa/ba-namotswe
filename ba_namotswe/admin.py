@@ -88,7 +88,7 @@ class ExtractionAdmin(BaseCrfModelAdmin):
     form = ExtractionForm
     # fields = ()
     readonly_fields = ('subject_visit', )
-    filter_horizontal = ('art_history', 'io_history')
+    filter_horizontal = ('art_history', 'oi_history')
     radio_fields = {
         'height_measured': admin.VERTICAL,
         'weight_measured': admin.VERTICAL,
