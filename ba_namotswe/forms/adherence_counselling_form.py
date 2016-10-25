@@ -1,12 +1,12 @@
 from django import forms
-from ba_namotswe.models import AdherenceCounselling
+
+from ba_namotswe.models.adherence_counselling import AdherenceCounselling
 
 
 class AdherenceCounsellingForm(forms.ModelForm):
 
     def clean(self):
-#         self.validate_adherence_partner_relation()
-#         self.validate_adherence_partne_relation_other()
+        self.validate_adherence_partner_relation_other()
         return self.cleaned_data
 
     def validate_adherence_partner_relation_other(self):

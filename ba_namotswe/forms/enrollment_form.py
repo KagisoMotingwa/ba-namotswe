@@ -8,6 +8,9 @@ from django.urls.base import reverse
 
 
 class EnrollmentForm(forms.ModelForm):
+    subject_identifier = forms.CharField(
+        label='Patient Identifier',
+        max_length=36)
 
     def clean(self):
         self.validate_initial_visit_date()

@@ -10,7 +10,7 @@ class TreatmentFactory(factory.DjangoModelFactory):
     class Meta:
         model = Treatment
 
-    perinatal_infection = YES
+    perinatal_infection = 'tb',
 
     pmtct = YES
 
@@ -20,8 +20,8 @@ class TreatmentFactory(factory.DjangoModelFactory):
 
     infant_prohylaxis_rx = 'AZT'
 
-    counseling = YES
+    counseling = 'session'
 
-    counseling_date = date(2016, 7, 7)
+    adherence_partner_rel = 'mother'
 
-    adherence_partner_rel = 'Mother'
+    adherence_partner_rel_other = None

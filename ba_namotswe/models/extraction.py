@@ -89,7 +89,7 @@ class Extraction(CrfModel):
         choices=YES_NO)
 
     # TODO: skip_logic io_history_table: display field only if non-TB OI since last visit=YES
-    io_history = models.ManyToManyField(
+    oi_history = models.ManyToManyField(
         Oi,
         verbose_name='Opportunistic Infections Since last visit')
 
