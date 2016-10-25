@@ -13,7 +13,11 @@ from .models import (
     SubjectConsent, SubjectVisit, ExtractionChecklist, Enrollment, Oi, Extraction, Treatment, ArtRegimen,
     Appointment, TbHistory, AdherenceCounselling, ArvHistory, AssessmentHistory, Death, PregnancyHistory,
     TransferHistory)
+from ba_namotswe.models.arv import Arv
+from ba_namotswe.models.pregnancy import Pregnancy
+from ba_namotswe.models.transfer import Transfer
 from ba_namotswe.admin_site import ba_namotswe_admin
+from django.contrib.admin.templatetags.admin_list import date_hierarchy
 
 
 class BaseModelAdmin(ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructionsMixin,
@@ -105,15 +109,25 @@ class ExtractionAdmin(BaseCrfModelAdmin):
     }
 
 
+class PregnancyInline(admin.TabularInline):
+    model = Pregnancy
+
+
 @admin.register(PregnancyHistory, site=ba_namotswe_admin)
-class PregnancyHistoryAdmin(BaseCrfModelAdmin):
-    list_filter = ('subject_visit', )
+class PregnancyHistoryAdmi(BaseCrfModelAdmin):
+    inlines = [PregnancyInline]
     form = PregnancyHistoryForm
+
+
+class TransferInline(admin.TabularInline):
+    model = Transfer
 
 
 @admin.register(TransferHistory, site=ba_namotswe_admin)
 class TransferHistoryAdmin(BaseCrfModelAdmin):
-    list_filter = ('subject_visit', )
+    inlines = [TransferInline]
+    radio_fields = {
+        'transfer_loc': admin.VERTICAL}
     form = TransferHistoryForm
 
 
@@ -129,15 +143,21 @@ class AssessmentHistoryAdmin(BaseCrfModelAdmin):
     form = AssessmentHistoryForm
 
 
+class ArvInline(admin.TabularInline):
+    model = Arv
+
+
 @admin.register(ArvHistory, site=ba_namotswe_admin)
 class ArvHistoryAdmin(BaseCrfModelAdmin):
-    list_filter = ('subject_visit', )
+    inlines = [ArvInline]
     form = ArvHistoryForm
 
 
 @admin.register(AdherenceCounselling, site=ba_namotswe_admin)
 class AdherenceCounsellingAdmin(BaseCrfModelAdmin):
-    list_filter = ('subject_visit', )
+    list_filter = ('adherence_partner', )
+    radio_fields = {
+        'adherence_partner': admin.VERTICAL}
     form = AdherenceCounsellingForm
 
 

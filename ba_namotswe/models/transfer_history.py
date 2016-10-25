@@ -6,13 +6,13 @@ from ..choices import TRANSFER
 
 class TransferHistory(CrfModel):
 
-    transfer_details = models.CharField(
-        verbose_name="Transfer of Care Details",
-        max_length=15,
-        choices=(
-            ('date_of_transfer', 'Date of Transfer'),
-            ('reason_for_transfer', 'Reason for Transfer'))
-    )
+#     transfer_details = models.CharField(
+#         verbose_name="Transfer of Care Details",
+#         max_length=15,
+#         choices=(
+#             ('date_of_transfer', 'Date of Transfer'),
+#             ('reason_for_transfer', 'Reason for Transfer'))
+#     )
 
     transfer_loc = models.CharField(
         verbose_name='Location of transfer',
@@ -28,7 +28,7 @@ class TransferHistory(CrfModel):
         null=True)
 
     def __str__(self):
-        return self.display_name
+        return self.transfer_loc
 
     class Meta(CrfModel.Meta):
         app_label = 'ba_namotswe'

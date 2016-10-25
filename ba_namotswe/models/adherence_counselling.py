@@ -24,5 +24,8 @@ class AdherenceCounselling(CrfModel):
         blank=True,
         null=True)
 
+    def __str__(self):
+        return self.adherence_partner
+
     class Meta(CrfModel.Meta):
         app_label = 'ba_namotswe'
